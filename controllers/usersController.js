@@ -5,9 +5,8 @@ const models = require('../models')
 controller.checkout = async (req, res) => {
     if (req.session.cart.quantity > 0){
 
-        let userId = 1;
+        let userId = req.user.id;
         res.locals.addresses = await models.Address.findAll({where: {userId}})
-        console.log(new Date())
         res.locals.cart = req.session.cart.getCart();
         return res.render('checkout');
     }else{
@@ -16,10 +15,9 @@ controller.checkout = async (req, res) => {
 }
 
 controller.placeorders = async (req, res) => {
-    let userId = 1;
+    let userId = req.user.id;
     // let {addressId, payment} = req.body;
     let addressId = isNaN(req.body.addressId) ? 0 : parseInt(req.body.addressId)
-    console.log("addressID", addressId)
     let address = await models.Address.findByPk(addressId);
     if (!address) {
         address = await models.Address.create({
@@ -52,7 +50,7 @@ controller.placeorders = async (req, res) => {
 }
 
 async function saveOrders(req, res, status){
-    let userId = 1
+    let userId = req.user.id
     let {items, ...other}= req.session.cart.getCart();
     let order = await models.Order.create({
         userId,

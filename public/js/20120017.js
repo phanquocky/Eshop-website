@@ -97,6 +97,19 @@ function placeorders(e){
     }
 }
 
+function checkPasswordConfirm(formId){
+    let password = document.querySelector(`#${formId} [name=password]`)
+    let confirmPassword = document.querySelector(`#${formId} [name=confirmPassword]`)
+    console.log(password.value)
+
+    if (password.value != confirmPassword.value) {
+        confirmPassword.setCustomValidity('Password not match')
+        confirmPassword.reportValidity();
+    }else{
+        confirmPassword.setCustomValidity('')
+    }
+}
+
 
 
 
