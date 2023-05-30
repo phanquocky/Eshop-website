@@ -8,7 +8,7 @@ const {createPagination} = require('express-handlebars-paginate');
 const session = require('express-session');
 const passport = require('./controllers/passport');
 const flash = require('connect-flash');
-
+require('dotenv').config()
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.json())
