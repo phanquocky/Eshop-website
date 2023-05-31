@@ -1,5 +1,5 @@
 {
-  "use_env_variable": "POSTGRESQL_URL",
+  
   "development": {
     "username": "ptudwprojectdb_yqx4_user",
     "password": "4AJpoQ8NRs3gixFKp1gHiOaTEQGZZLDZ",
@@ -21,6 +21,7 @@
     "dialect": "postgres"
   },
   "production": {
+    "use_env_variable": "POSTGRESQL_URL",
     "username": "ptudwprojectdb_yqx4_user",
     "password": "4AJpoQ8NRs3gixFKp1gHiOaTEQGZZLDZ",
     "database": "ptudwprojectdb_yqx4",
