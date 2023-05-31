@@ -12,7 +12,7 @@ require('dotenv').config()
 const redisStore = require('connect-redis').default;
 const {createClient} = require('redis');
 const redisclient = createClient({
-    url: "redis://red-chrj4s9mbg5e1f72ppkg:6379"
+    url: process.env.REDIS_URL
 });
 redisclient.connect().catch(console.error);
 app.use(express.static(__dirname + '/public'));
@@ -35,7 +35,7 @@ app.engine('hbs', expressHandlebars.engine({
 app.set("view engine", 'hbs');
 
 app.use(session({
-    secret: 'S3cret',
+    secret: process.env.SESSION_SECRET,
     store: new redisStore({client: redisclient}),
     resave: false,
     saveUninitialized: false,
