@@ -9,7 +9,12 @@ const session = require('express-session');
 const passport = require('./controllers/passport');
 const flash = require('connect-flash');
 require('dotenv').config()
-
+const redisStore = require('connect-redis').default;
+const {createClient} = require('redis');
+const redisclient = createClient({
+    url: "redis://red-chrj4s9mbg5e1f72ppkg:6379"
+});
+redisclient.connect().catch(console.error);
 app.use(express.static(__dirname + '/public'));
 app.use(express.json())
 app.use(express.urlencoded({extends: false}));
@@ -31,6 +36,7 @@ app.set("view engine", 'hbs');
 
 app.use(session({
     secret: 'S3cret',
+    store: new redisStore({client: redisclient}),
     resave: false,
     saveUninitialized: false,
     cookie:{
